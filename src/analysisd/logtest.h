@@ -12,6 +12,7 @@
 #include "rules.h"
 #include "decoders/decoder.h"
 #include "eventinfo.h"
+#include "../config/logtest-config.h"
 #include "../headers/pthreads_op.h"
 #include "../headers/defs.h"
 #include "../headers/validate_op.h"
@@ -40,11 +41,6 @@ typedef struct sessionLogtest {
  */
 OSHash *all_sessions;
 
-/**
- * @brief Mutex to prevent race condition in accept syscall.
- */
-pthread_mutex_t logtest_mutex;
-
 
 /**
  * @brief Initialize Wazuh Logtest. Initialize the listener and creat threads.
@@ -52,6 +48,10 @@ pthread_mutex_t logtest_mutex;
  */
 void *w_logtest_init();
 
+/**
+ * @brief Initialize internal options parameters
+ */
+int w_logtest_init_parameters();
 
 /**
  * @brief Main function of Wazuh Logtest module. Listen and treat conexions with clients.
